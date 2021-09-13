@@ -16,7 +16,7 @@ provider "spotify" {
 }
 
 resource "spotify_playlist" "playlist" {
-  name        = "Terraform Summer Playlist"
+  name        = "Nico's Terraform Playlist"
   description = "This playlist was created by Terraform"
   public      = true
 
