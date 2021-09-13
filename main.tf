@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     spotify = {
-      version = "~> 0.1.5"
+      version = "~> 0.2.6"
       source  = "conradludgate/spotify"
     }
   }
@@ -16,7 +16,7 @@ provider "spotify" {
 }
 
 resource "spotify_playlist" "playlist" {
-  name        = "Nico's Terraform Playlist"
+  name        = "Terraform Summer Playlist"
   description = "This playlist was created by Terraform"
   public      = true
 
@@ -24,15 +24,20 @@ resource "spotify_playlist" "playlist" {
     data.spotify_search_track.by_artist.tracks[0].id,
     data.spotify_search_track.by_artist.tracks[1].id,
     data.spotify_search_track.by_artist.tracks[2].id,
+    data.spotify_search_track.by_artist.tracks[3].id,
+    data.spotify_search_track.by_artist.tracks[4].id,
+    data.spotify_search_track.by_artist.tracks[5].id,
+    data.spotify_search_track.by_artist.tracks[6].id,
+    data.spotify_search_track.by_artist.tracks[7].id,
   ]
 }
 
 data "spotify_search_track" "by_artist" {
-  artists = ["The Weeknd"]
-  #  album = "Starboy"
-  #  name  = "Starboy"
-}
+  artist = "The Weeknd"
 
-output "tracks" {
-  value = data.spotify_search_track.by_artist.tracks
 }
+output "playlist_url" {
+  value       = "https://open.spotify.com/playlist/${spotify_playlist.playlist.id}"
+  description = "Visit this URL in your browser to listen to the playlist"
+} 
+
